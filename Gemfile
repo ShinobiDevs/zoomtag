@@ -32,6 +32,7 @@ gem "fb_graph"
 
 group :development do
   gem "thin"
+  gem "httparty"
 end
 
 group :doc do

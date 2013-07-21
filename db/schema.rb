@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130721125901) do
+ActiveRecord::Schema.define(version: 20130721153918) do
 
   create_table "players", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -22,10 +22,14 @@ ActiveRecord::Schema.define(version: 20130721125901) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "facebook_uuid"
+    t.string   "facebook_access_token"
   end
 
   add_index "players", ["authentication_token"], name: "index_players_on_authentication_token", unique: true, using: :btree
   add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree
+  add_index "players", ["facebook_access_token"], name: "index_players_on_facebook_access_token", using: :btree
+  add_index "players", ["facebook_uuid"], name: "index_players_on_facebook_uuid", using: :btree
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -3,5 +3,5 @@ class Player < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :token_authenticatable
+         :recoverable, :rememberable, :token_authenticatable
 end
