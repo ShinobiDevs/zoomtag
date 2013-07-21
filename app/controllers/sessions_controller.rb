@@ -4,7 +4,7 @@ class SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    resource = Player.find_for_database_authentication(:facebook_access_token => params[:access_token], facebook_uuid: params[:uuid])
+    resource = Player.find_for_database_authentication(facebook_uuid: params[:uuid])
     
     if resource.blank?
       facebook_user = FbGraph::User.fetch(params[:uuid])
@@ -23,7 +23,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
-    resource = Player.find_for_database_authentication(:facebook_access_token => params[:access_token])
+    resource = Player.find_for_database_authentication(facebook_uuid: params[:uuid])
     resource.authentication_token = nil
     resource.save
     render nothing: true, status: :ok
