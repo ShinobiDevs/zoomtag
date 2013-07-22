@@ -17,9 +17,12 @@ class ChallangesController < ApplicationController
 
   # POST /games.json
   def create
-    @challange = current_player.games.find(params[:game_id]).challanges.build(params[:challange])
+    @game = current_player.games.find(params[:game_id])
+    @challange = @game.challanges.build(params[:challange])
     @challange.player = current_player
-    @challange.save
+    if @challange.save
+      @game.advance_turn!
+    end
     respond_with(@challange)
   end
 end

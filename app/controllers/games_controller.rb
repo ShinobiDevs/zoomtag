@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
+  
   before_filter :authenticate_player!
-
   respond_to :json
 
   # GET /games.json

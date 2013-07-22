@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem "devise"
 gem "fb_graph"
+gem "font-awesome-rails"
 
 group :development do
   gem "thin"

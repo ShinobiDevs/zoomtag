@@ -10,4 +10,28 @@
  *
  *= require_self
  *= require_tree .
+ *= require font-awesome
  */
+
+#content {
+  width:50%;
+  margin-left:150px;
+  margin-top:120px;
+}
+#content p {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-top:18px;
+  font-size: 38px;
+}
+
+#content h1 {
+  font-family: 'Gorditas', cursive;
+  font-size: 75px;
+  padding:0;
+  margin:0;
+}
+
+img#preview {
+  float:right;
+  margin-right: 150px;
+}
