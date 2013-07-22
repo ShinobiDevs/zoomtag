@@ -31,6 +31,10 @@ gem "devise"
 gem "fb_graph"
 gem "font-awesome-rails"
 
+group :production do
+  gem 'pg'
+end
+
 group :development do
   gem "thin"
   gem "httparty"
