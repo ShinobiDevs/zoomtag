@@ -1,3 +1,6 @@
 development:
   client_id: "515511105188973"
   client_secret: "66f63eb07a3b6f54a5638a251051a07c"
+production:
+  client_id: "515511105188973"
+  client_secret: "66f63eb07a3b6f54a5638a251051a07c"
