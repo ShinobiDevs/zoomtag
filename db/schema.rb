@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130721153918) do
+ActiveRecord::Schema.define(version: 20130722121123) do
+
+  create_table "challanges", force: true do |t|
+    t.string   "image_url"
+    t.string   "easy_tag"
+    t.string   "medium_tag"
+    t.string   "hard_tag"
+    t.integer  "player_id"
+    t.string   "hint"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "challanges_games", id: false, force: true do |t|
+    t.integer "game_id"
+    t.integer "challange_id"
+  end
+
+  add_index "challanges_games", ["challange_id"], name: "index_challanges_games_on_challange_id", using: :btree
+  add_index "challanges_games", ["game_id"], name: "index_challanges_games_on_game_id", using: :btree
+
+  create_table "games", force: true do |t|
+    t.integer  "player1_id"
+    t.integer  "player2_id"
+    t.integer  "started_by_player_id"
+    t.integer  "current_turn"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "games", ["player1_id"], name: "index_games_on_player1_id", using: :btree
+  add_index "games", ["player2_id"], name: "index_games_on_player2_id", using: :btree
 
   create_table "players", force: true do |t|
     t.string   "email",                  default: "", null: false

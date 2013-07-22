@@ -1,5 +1,8 @@
 Zoomtag::Application.routes.draw do
+  
   devise_for(:players,:controllers => { :sessions => "sessions" })
 
-  resources :games
+  resources :games do
+    resources :challanges
+  end
 end
