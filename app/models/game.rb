@@ -6,7 +6,7 @@ class Game < ActiveRecord::Base
   belongs_to :player2, :class_name => "Player", :foreign_key => "player2_id"
 
   def advance_turn!
-    self.current_turn = (current_turn == player1_id : player2_id : player1_id)
+    self.current_turn = (current_turn == player1_id ? player2_id : player1_id)
     save!
   end
 end
