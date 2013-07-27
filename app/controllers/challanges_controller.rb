@@ -19,9 +19,6 @@ class ChallangesController < ApplicationController
   def create
     @challange = @game.challanges.build(params[:challange])
     @challange.player = current_player
-    if @challange.save
-      @game.advance_turn!
-    end
     respond_with(@challange)
   end
 

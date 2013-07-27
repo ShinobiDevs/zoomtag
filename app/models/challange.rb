@@ -16,14 +16,18 @@
 class Challange < ActiveRecord::Base
 
   belongs_to :game
-
   belongs_to :player
 
   before_save :downcase_tags
+  after_create :advance_game_turn
 
   validates :easy_tag, :medium_tag, :hard_tag, presence: true
-  
+
   protected
+
+  def advance_game_turn
+    self.game.advance_turn!
+  end
 
   def downcase_tags
     self.easy_tag = self.easy_tag.downcase

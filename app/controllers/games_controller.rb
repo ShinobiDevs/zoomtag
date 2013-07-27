@@ -8,6 +8,14 @@ class GamesController < ApplicationController
     respond_with({games: current_player.games})
   end
 
+  # POST /games.json
+  def create
+    @game = current_player.games.build(params[:game])
+    @game.current_turn = current_player.id
+    @game.save
+    respond_with(@game)
+  end
+
   # GET /games/1.json
   def show
     @game = current_player.games.find(params[:id])
