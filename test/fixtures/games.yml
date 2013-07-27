@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id                   :integer          not null, primary key
+#  player1_id           :integer
+#  player2_id           :integer
+#  started_by_player_id :integer
+#  current_turn         :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  waiting_to_challange :boolean          default(TRUE)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the

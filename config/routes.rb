@@ -5,6 +5,7 @@ Zoomtag::Application.routes.draw do
 
   resources :games do
     resources :challanges
+    resources :answers
   end
 
   root to: "home#index"

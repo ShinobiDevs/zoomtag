@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: challanges
+#
+#  id         :integer          not null, primary key
+#  image_url  :string(255)
+#  easy_tag   :string(255)
+#  medium_tag :string(255)
+#  hard_tag   :string(255)
+#  player_id  :integer
+#  hint       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the

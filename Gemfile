@@ -38,6 +38,7 @@ end
 group :development do
   gem "thin"
   gem "httparty"
+  gem "annotate"
 end
 
 group :doc do

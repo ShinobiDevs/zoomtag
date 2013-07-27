@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722121123) do
+ActiveRecord::Schema.define(version: 20130727185128) do
 
   create_table "challanges", force: true do |t|
     t.string   "image_url"
@@ -22,15 +22,8 @@ ActiveRecord::Schema.define(version: 20130722121123) do
     t.string   "hint"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "game_id"
   end
-
-  create_table "challanges_games", id: false, force: true do |t|
-    t.integer "game_id"
-    t.integer "challange_id"
-  end
-
-  add_index "challanges_games", ["challange_id"], name: "index_challanges_games_on_challange_id", using: :btree
-  add_index "challanges_games", ["game_id"], name: "index_challanges_games_on_game_id", using: :btree
 
   create_table "games", force: true do |t|
     t.integer  "player1_id"
@@ -39,6 +32,7 @@ ActiveRecord::Schema.define(version: 20130722121123) do
     t.integer  "current_turn"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "waiting_to_challange", default: true
   end
 
   add_index "games", ["player1_id"], name: "index_games_on_player1_id", using: :btree
