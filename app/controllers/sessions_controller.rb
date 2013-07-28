@@ -18,7 +18,7 @@ class SessionsController < Devise::SessionsController
 
     sign_in(:player, resource)
     resource.ensure_authentication_token!
-    render :json=> {:auth_token=>resource.authentication_token, :access_token => resource.facebook_access_token}
+    render :json=> {:auth_token=>resource.authentication_token}
     return
   end
 

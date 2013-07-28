@@ -12,14 +12,15 @@ class ChallangesController < ApplicationController
   # GET /games/1/challanges/1.json
   def show
     @challange = @game.challanges.find(params[:id])
-    respond_with(@challange)
+    respond_with([@game, @challange])
   end
 
   # POST /games/1/challanges.json
   def create
-    @challange = @game.challanges.build(params[:challange])
+    @challange = @game.challanges.build(params.require(:challange).permit(:image_url, :easy_tag, :medium_tag, :hard_tag))
     @challange.player = current_player
-    respond_with(@challange)
+    @challange.save
+    respond_with([@game, @challange])
   end
 
   protected
@@ -27,8 +28,7 @@ class ChallangesController < ApplicationController
   def find_game
     @game = current_player.games.where(params[:game_id]).includes(:challanges).first
     if @game.blank?
-      render nothing: true, status: :not_found
-      return
+      something_not_found
     end
   end
 end

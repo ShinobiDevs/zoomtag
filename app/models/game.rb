@@ -24,4 +24,11 @@ class Game < ActiveRecord::Base
     self.waiting_to_challange = true
     save!
   end
+
+  def as_json(options = {})
+    super(options.merge(methods: [:next_challange]))
+  end
+  def next_challange
+    self.challanges.last
+  end
 end
