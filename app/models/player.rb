@@ -22,6 +22,10 @@ class Player < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :token_authenticatable
 
+  def to_fb
+    FbGraph::User.fetch(self.facebook_uuid, access_token: FACEBOOK_APP.access_token)
+  end
+
   def games
     Game.scoped.where(["player1_id = :id OR player2_id = :id", {:id => self.id}])
   end
