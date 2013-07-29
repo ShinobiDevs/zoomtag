@@ -19,6 +19,8 @@ class Game < ActiveRecord::Base
   belongs_to :player1, :class_name => "Player", :foreign_key => "player1_id"
   belongs_to :player2, :class_name => "Player", :foreign_key => "player2_id"
 
+  after_create :register_games
+
   def advance_turn!
     self.current_turn = (current_turn == player1_id ? player2_id : player1_id)
     self.waiting_to_challange = true
@@ -64,5 +66,14 @@ class Game < ActiveRecord::Base
   
   def next_challange
     self.challanges.last
+  end
+
+  protected
+
+  def register_games
+    $redis.multi do
+      $redis.sadd "player:#{player1_id}:playing_with", player2.facebook_uuid
+      $redis.sadd "player:#{player2_id}:playing_with", player1.facebook_uuid
+    end
   end
 end

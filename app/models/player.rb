@@ -25,4 +25,12 @@ class Player < ActiveRecord::Base
   def games
     Game.scoped.where(["player1_id = :id OR player2_id = :id", {:id => self.id}])
   end
+
+  def playing_with_players
+    $redis.smembers "player:#{self.id}:playing_with"
+  end
+
+  def playing_with?(player)
+    $redis.sismember "player:#{self.id}:playing_with", player.facebook_uuid
+  end
 end
