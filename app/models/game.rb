@@ -26,8 +26,9 @@ class Game < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(options.merge(methods: [:next_challange]))
+    super(options.merge(methods: [:next_challange], include: [:player1, :player2]))
   end
+  
   def next_challange
     self.challanges.last
   end
