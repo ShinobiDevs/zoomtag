@@ -25,8 +25,33 @@ class Game < ActiveRecord::Base
     save!
   end
 
+  def score!(player, score)
+    score = case score.downcase
+    when "easy"
+      5
+    when "medium"
+      10
+    when "hard"
+      20
+    else
+      0
+    end
+    $redis.incrby("games:#{self.id}:player:#{player.id}", score.to_i)
+  end
+
+  def get_score_for_player(player)
+    $redis.get("games:#{self.id}:player:#{player.id}").to_i
+  end
+
+  def scores
+    {
+      player1: get_score_for_player(player1),
+      player2: get_score_for_player(player2),
+    }
+  end
+
   def as_json(options = {})
-    super(options.merge(methods: [:next_challange], include: [:player1, :player2]))
+    super(options.merge(methods: [:next_challange, :scores], include: [:player1, :player2]))
   end
   
   def next_challange

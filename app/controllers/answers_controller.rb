@@ -20,6 +20,7 @@ class AnswersController < ApplicationController
     end
 
     if @success
+      @game.score!(current_player, difficulty.downcase)
       render nothing: true, status: :ok
     else
       render nothing: true, status: :conflict

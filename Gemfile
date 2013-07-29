@@ -31,6 +31,10 @@ gem "devise"
 gem "fb_graph"
 gem "font-awesome-rails"
 
+gem 'hiredis'
+gem 'redis', :require => ["redis", "redis/connection/hiredis"]
+
+gem 'leaderboard'
 group :production do
   gem 'pg'
 end

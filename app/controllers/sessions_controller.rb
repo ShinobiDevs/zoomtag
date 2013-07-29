@@ -9,9 +9,9 @@ class SessionsController < Devise::SessionsController
     if resource.blank?
       facebook_user = FbGraph::User.fetch(params[:uuid])
 
-      email = facebook_user.email || "#{params[:uuid]}@zoomtag.com"
-      resource = Player.create!(facebook_access_token: params[:access_token],
-                                facebook_uuid: params[:uuid],
+      email = facebook_user.email || "guest_#{params[:uuid]}@zoomtag.com"
+      resource = Player.create!(facebook_access_token: facebook_user.access_token,
+                                facebook_uuid: facebook_user.identity,
                                 password: Devise.friendly_token[0,20],
                                 email: email)
     end
