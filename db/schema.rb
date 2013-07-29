@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727185128) do
+ActiveRecord::Schema.define(version: 20130729131626) do
 
   create_table "challanges", force: true do |t|
     t.string   "image_url"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20130727185128) do
     t.datetime "updated_at"
     t.string   "facebook_uuid"
     t.string   "facebook_access_token"
+    t.string   "name"
+    t.string   "profile_picture"
   end
 
   add_index "players", ["authentication_token"], name: "index_players_on_authentication_token", unique: true, using: :btree

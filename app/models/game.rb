@@ -25,7 +25,12 @@ class Game < ActiveRecord::Base
     save!
   end
 
+  def playing?(player)
+    return ((player.id == player1_id) || (player.id == player2_id))
+  end
+
   def score!(player, score)
+    return false unless playing?(player)
     score = case score.downcase
     when "easy"
       5
@@ -37,6 +42,9 @@ class Game < ActiveRecord::Base
       0
     end
     $redis.incrby("games:#{self.id}:player:#{player.id}", score.to_i)
+    $leaderboard.rank_member(player.id, score.to_i)
+    $leaderboard.update_member_data(player.id, JSON.generate({name: player.name, last_played: Time.now.to_i}))
+    true
   end
 
   def get_score_for_player(player)

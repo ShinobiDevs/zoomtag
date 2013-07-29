@@ -12,6 +12,8 @@ class SessionsController < Devise::SessionsController
       email = facebook_user.email || "guest_#{params[:uuid]}@zoomtag.com"
       resource = Player.create!(facebook_access_token: facebook_user.access_token,
                                 facebook_uuid: facebook_user.identity,
+                                name: facebook_user.name,
+                                profile_picture: facebook_user.picture,
                                 password: Devise.friendly_token[0,20],
                                 email: email)
     end
