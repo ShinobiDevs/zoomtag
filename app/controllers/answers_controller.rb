@@ -7,20 +7,17 @@ class AnswersController < ApplicationController
     @challenge = @game.challanges.find(params[:id])
     answer = params[:answer]
     difficulty = params[:difficulty]
-    case difficulty.downcase
-    when "easy"
-      @success = @challenge.easy_tag == answer.downcase
-    when "medium"
-      @success = @challenge.medium_tag == answer.downcase
-    when "hard"
-      @success = @challenge.medium_tag == answer.downcase
-    else
-      render json: {error: "#{difficulty} is an invalid difficulty"}, status: :unprocessable_entity
-      return
-    end
 
-    if @success
+    if @challenge.answer(difficulty.downcase) == answer.downcase
       @challenge.update_attribute(:guessed_by_id, current_player.id)
+      fb_user = current_player.to_fb
+      fb_user.og_action!("zoomtag:guess", 
+                                      zoomtag: "http://zoomtag.heroku.com/challanges_actions/#{@challenge.id}?difficulty=#{difficulty.downcase}",
+                                      guessed_word: @challenge.answer(difficulty.downcase),
+                                      difficulty: difficulty.downcase,
+                                      explicitly_shared: 1,
+                                      guess_image_url: @challenge.image_url,
+                                      access_token: FACEBOOK_APP.access_token)
       @game.score!(current_player, difficulty.downcase)
       render nothing: true, status: :ok
     else

@@ -24,6 +24,14 @@ class Challange < ActiveRecord::Base
 
   validates :easy_tag, :medium_tag, :hard_tag, presence: true
 
+  def answer(difficulty)
+    if self.respond_to?("#{difficulty.downcase}_tag")
+      self.send("#{difficulty.downcase}_tag")
+    else
+      false
+    end
+  end
+
   protected
 
   def advance_game_turn
