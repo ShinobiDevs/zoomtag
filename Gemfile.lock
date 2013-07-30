@@ -56,6 +56,8 @@ GEM
       tzinfo
     font-awesome-rails (3.2.1.2)
       railties (>= 3.2, < 5.0)
+    haml (4.0.3)
+      tilt
     hike (1.2.3)
     hiredis (0.4.5)
     httparty (0.11.0)
@@ -160,6 +162,7 @@ DEPENDENCIES
   devise
   fb_graph
   font-awesome-rails
+  haml
   hiredis
   httparty
   jbuilder (~> 1.2)

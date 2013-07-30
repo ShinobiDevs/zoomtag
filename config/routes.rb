@@ -6,6 +6,8 @@ Zoomtag::Application.routes.draw do
 
   resources :friends, only: [:index]
 
+  resources :challanges_actions
+
   resources :games do
     resources :challanges
     resources :answers
