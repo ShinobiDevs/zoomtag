@@ -12,7 +12,10 @@ class ChallangesController < ApplicationController
   # GET /games/1/challanges/1.json
   def show
     @challange = @game.challanges.find(params[:id])
-    respond_with([@game, @challange])
+    respond_to do |wants|
+      wants.json { respond_with([@game, @challange]) }
+      wants.html
+    end
   end
 
   # POST /games/1/challanges.json
