@@ -20,6 +20,7 @@ class AnswersController < ApplicationController
     end
 
     if @success
+      @challenge.update_attribute(:guessed_by_id, current_player.id)
       @game.score!(current_player, difficulty.downcase)
       render nothing: true, status: :ok
     else

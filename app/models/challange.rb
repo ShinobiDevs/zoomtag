@@ -18,6 +18,7 @@ class Challange < ActiveRecord::Base
   belongs_to :game
   belongs_to :player
 
+  belongs_to :guessed_by, class_name: "Player"
   before_save :downcase_tags
   after_create :advance_game_turn
 
