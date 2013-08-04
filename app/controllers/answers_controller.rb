@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
                                       difficulty: difficulty.downcase,
                                       explicitly_shared: 1,
                                       guess_image_url: @challenge.image_url,
-                                      access_token: FACEBOOK_APP.access_token)
+                                      access_token: FACEBOOK_APP.access_token.to_s)
       @game.score!(current_player, difficulty.downcase)
       render nothing: true, status: :ok
     else

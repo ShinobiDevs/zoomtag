@@ -13,6 +13,8 @@
 #  updated_at             :datetime
 #  facebook_uuid          :string(255)
 #  facebook_access_token  :string(255)
+#  name                   :string(255)
+#  profile_picture        :string(255)
 #
 
 class Player < ActiveRecord::Base
@@ -27,7 +29,12 @@ class Player < ActiveRecord::Base
   end
 
   def games
-    Game.scoped.where(["player1_id = :id OR player2_id = :id", {:id => self.id}])
+    game_ids = $redis.smembers "player:#{self.id}:games"
+    if game_ids.any?
+      Game.scoped.where(:id => game_ids)
+    else
+      []
+    end
   end
 
   def playing_with_players
