@@ -4,12 +4,12 @@ class SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    resource = Player.find_for_database_authentication(facebook_uuid: params[:uuid])
+    resource = Player.find_for_database_authentication(facebook_access_token: params[:access_token])
     
     if resource.blank?
       facebook_user = FbGraph::User.fetch :me, access_token: params[:access_token]
 
-      email = facebook_user.email || "guest_#{params[:uuid]}@zoomtag.com"
+      email = facebook_user.email || "guest_#{facebook_user.identifier}@zoomtag.com"
       resource = Player.create!(facebook_access_token: facebook_user.access_token.to_s,
                                 facebook_uuid: facebook_user.identifier,
                                 name: facebook_user.name,
@@ -21,8 +21,7 @@ class SessionsController < Devise::SessionsController
     sign_in(:player, resource)
     resource.ensure_authentication_token!
     
-    puts resource.external_json
-    render :json => (resource.external_json)
+    render :json => resource
     return
   end
 
