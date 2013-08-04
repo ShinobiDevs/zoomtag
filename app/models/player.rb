@@ -38,7 +38,7 @@ class Player < ActiveRecord::Base
     $redis.sismember "player:#{self.id}:playing_with", player.facebook_uuid
   end
 
-  def as_json(options)
+  def as_json(options)  
     super(options.merge(only: [:id, :authentication_token, :name, :profile_picture]))
   end
 end

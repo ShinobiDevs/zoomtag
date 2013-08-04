@@ -44,6 +44,12 @@ group :development do
   gem "thin"
   gem "httparty"
   gem "annotate"
+  
+  gem "pry"
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
+
 end
 
 group :doc do
@@ -62,8 +68,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-gem "pry"
-gem 'pry-remote'
-gem 'pry-stack_explorer'
-gem 'pry-debugger'
