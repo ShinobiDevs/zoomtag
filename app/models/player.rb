@@ -39,7 +39,6 @@ class Player < ActiveRecord::Base
   end
 
   def as_json(options)
-binding.pry
     super(options.merge(only: [:id, :authentication_token, :name, :profile_picture]))
   end
 end
