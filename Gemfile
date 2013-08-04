@@ -62,3 +62,8 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem "pry"
+gem 'pry-remote'
+gem 'pry-stack_explorer'
+gem 'pry-debugger'

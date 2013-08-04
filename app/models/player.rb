@@ -37,4 +37,10 @@ class Player < ActiveRecord::Base
   def playing_with?(player)
     $redis.sismember "player:#{self.id}:playing_with", player.facebook_uuid
   end
+
+  def external_json
+    attrs = self.attributes.dup
+    [:encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at].each {|field| attrs.delete(field)}
+    attrs.to_json
+  end
 end
