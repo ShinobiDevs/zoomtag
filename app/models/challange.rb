@@ -2,15 +2,17 @@
 #
 # Table name: challanges
 #
-#  id         :integer          not null, primary key
-#  image_url  :string(255)
-#  easy_tag   :string(255)
-#  medium_tag :string(255)
-#  hard_tag   :string(255)
-#  player_id  :integer
-#  hint       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id            :integer          not null, primary key
+#  image_url     :string(255)
+#  easy_tag      :string(255)
+#  medium_tag    :string(255)
+#  hard_tag      :string(255)
+#  player_id     :integer
+#  hint          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  game_id       :integer
+#  guessed_by_id :integer
 #
 
 class Challange < ActiveRecord::Base
@@ -23,6 +25,14 @@ class Challange < ActiveRecord::Base
   after_create :advance_game_turn
 
   validates :easy_tag, :medium_tag, :hard_tag, presence: true
+
+  def answer(difficulty)
+    if self.respond_to?("#{difficulty.downcase}_tag")
+      self.send("#{difficulty.downcase}_tag")
+    else
+      false
+    end
+  end
 
   protected
 

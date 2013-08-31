@@ -72,6 +72,8 @@ class Game < ActiveRecord::Base
 
   def register_games
     $redis.multi do
+      $redis.sadd "player:#{player1_id}:games", self.id
+      $redis.sadd "player:#{player2_id}:games", self.id
       $redis.sadd "player:#{player1_id}:playing_with", player2.facebook_uuid
       $redis.sadd "player:#{player2_id}:playing_with", player1.facebook_uuid
     end

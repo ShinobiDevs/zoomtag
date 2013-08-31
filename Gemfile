@@ -27,6 +27,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem "haml"
 gem "devise"
 gem "fb_graph"
 gem "font-awesome-rails"
@@ -43,6 +44,12 @@ group :development do
   gem "thin"
   gem "httparty"
   gem "annotate"
+  
+  gem "pry"
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
+
 end
 
 group :doc do
@@ -61,8 +68,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-gem "pry"
-gem 'pry-remote'
-gem 'pry-stack_explorer'
-gem 'pry-debugger'
