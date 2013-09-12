@@ -1,0 +1,2 @@
+FlickRaw.api_key="19ab72c553776abf61abe28c7a39bea5"
+FlickRaw.shared_secret="fe75de7ef0476105"
