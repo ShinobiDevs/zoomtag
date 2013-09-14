@@ -1,10 +1,10 @@
 Zoomtag::Application.routes.draw do
   
-  get "home/index"
-
   devise_for(:players,:controllers => { :sessions => "sessions" })
 
   resources :friends, only: [:index]
+
+  resources :pictures, only: [:index]
 
   resources :challanges_actions
 

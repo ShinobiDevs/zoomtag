@@ -21,9 +21,14 @@ class Game < ActiveRecord::Base
 
   after_create :register_games
 
+  def require_new_challange!
+    self.waiting_to_challange = true
+    save!
+  end
+
   def advance_turn!
     self.current_turn = (current_turn == player1_id ? player2_id : player1_id)
-    self.waiting_to_challange = true
+    self.waiting_to_challange = false
     save!
   end
 

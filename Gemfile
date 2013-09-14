@@ -31,6 +31,7 @@ gem "haml"
 gem "devise"
 gem "fb_graph"
 gem "font-awesome-rails"
+gem "flickraw"
 
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]

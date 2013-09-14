@@ -19,6 +19,7 @@ class AnswersController < ApplicationController
                                       guess_image_url: @challenge.image_url,
                                       access_token: FACEBOOK_APP.access_token.to_s)
       @game.score!(current_player, difficulty.downcase)
+      @game.require_new_challange!
       render nothing: true, status: :ok
     else
       render nothing: true, status: :conflict
