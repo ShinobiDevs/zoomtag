@@ -30,11 +30,7 @@ class Player < ActiveRecord::Base
 
   def games
     game_ids = $redis.smembers "player:#{self.id}:games"
-    if game_ids.any?
-      Game.scoped.where(:id => game_ids)
-    else
-      []
-    end
+    Game.scoped.where(:id => game_ids)
   end
 
   def playing_with_players
