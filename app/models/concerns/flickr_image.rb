@@ -10,6 +10,6 @@ class FlickrImage
   end
 
   def url
-    FlickRaw.url(self.original_resp)
+    FlickRaw.url_s(self.original_resp)
   end
 end
